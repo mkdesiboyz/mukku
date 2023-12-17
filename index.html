@@ -1,270 +1,1847 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"></meta>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"></link>
+<div style="border: 2px solid black; padding: 20px; border-radius: 08px 05px 0px 0px">
+  <html lang="en">
+
+  <title>Quiz</title>
   <style>
-    body, html {
-      height: 100%;
-      margin: 0;
-    }
-
-    .mobile-screen {
-      width: 30%;
-      height: 90vh;
-      overflow: hidden;
-      position: relative;
-      border: 5px solid red;
-      border-radius: 20px;
-      margin: 0 auto;
-      background-color: #000; /* Set background color as needed */
-    }
-
-    .swiper-container {
-      width: 100%;
-      height: 100%;
-    }
-
-    .swiper-slide {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-
-    .swiper-slide video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block; /* Make the video a block-level element */
-      margin: 0 auto; /* Center the video horizontally */
-    }
-
-    .swiper-button-up,
-    .swiper-button-down {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 40px;
-      height: 40px;
-      background-color: #333;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      border: 2px solid red;
-      border-radius: 7px;
-      cursor: pointer;
-      z-index: 10;
-    }
-
-    .swiper-button-up {
-      left: 10px;
-    }
-
-    .swiper-button-down {
-      right: 10px;
-    }
-
-    .profile-info {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
+    .quiz-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+       padding: 05px;
+  box-sizing: border-box;
+}
+    .instruction-page {
       text-align: left;
-      padding: 10px;
-      background-color: rgba(0, 0, 0, 0.5);
-      box-sizing: border-box;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
     }
-
-    .profile-pic {
-      width: 23px; 
-      height: 23px;
-      border-radius: 50%;
-      overflow: hidden;
-      margin-right: 10px;
-      display: inline-block;
-    }
-
-    .profile-pic img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .profile-text {
-      color: #fff;
-      display: flex;
-      align-items: center;
-    }
-
-    .profile-name {
-      font-size: 16px;
+    .instruction-page button {
+    margin-top: 20px;
+  }
+    .button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+ }
+    .question {
       font-weight: bold;
-      margin-right: 5px;
+    }
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.button-row button {
+  margin-right: 10px;
+}
+
+   
+  
+
+.option {
+    display: inline-block;
+    margin: 10px;
+    padding: 5px 5px 5px 25px; /* Add left padding to make space for the icon */
+    background-color: white; /* Set background color to white */
+    border: 2px solid black; /* Set border color to black */
+    border-radius: 5px;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+    max-width: 400px;
+    margin: 10px;
+    position: relative;
+  }
+
+  .option::before {
+    content: " "; /* Add a space for content */
+    display: inline-block;
+    width: 26px; /* Adjust the size of the radio icon */
+    height: 16px;
+    background-image: url('https://www.svgrepo.com/show/347322/radio-button.svg'); /* Add the path to your radio icon image */
+    background-size: contain; /* Adjust the size of the icon within the element */
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    left: 2px; /* Adjust the position to place it before the text */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%);
+  }
+
+  .option.selected {
+    background-color: yellow;
+    color: black;
+    font-weight: 600;
+  }
+    
+     .start-button {
+        display: block;
+        margin: 0 auto;
+        padding: 10px 20px;
+        width: 90%;
+        border: 3px solid black; /* Change the border color to red */
+        border-radius: 5px;
+        background-color: red; /* Change the background color to red */
+        color: white;
+        cursor: pointer;
+        outline: none;
+        transition: background-color 0.3s ease-in-out;
+        text-align: center;
+        font-size: 24px;
     }
 
-    .verified-checkmark {
-      width: 16px;
-      height: 16px;
-      margin-right: 5px;
+    .start-button:hover {
+        background-color: black; /* Change the hover background color to a darker shade of red */
+        color: White;
+        border: 3px solid #00ffff;
     }
 
-    .profile-paragraph {
-      color: #fff;
-      font-size: 14px;
-      margin-top: 5px;
+     
+  .question-image {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid black;
+    border-radius: 10px; /* Adjust the border radius as needed */
+    display: block; /* Ensure it's treated as a block-level element */
+    margin: 0 auto; /* Center the image horizontally */
+    padding: 10px; /* Add some padding for spacing */
+    }
+ 
+
+.custom-button {
+  background-color: transparent !important;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.custom-button:hover {
+  background-color: transparent !important; /* Remove the hover background color */
+  color: white; /* Set the text color for the hover state */
+}
+
+
+
+
+
+.custom-svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px; /* Add spacing between text and SVG */
+}
+    #submitBtn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: 2px solid green;
+    border-radius: 5px;
+    width: 70%;
+    background-color: green;
+    color: ;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease-in-out;
+  }
+  #submitBtn:hover {
+    background-color: green;
+    color: white;
+  }
+
+
+
+
+  #submitBtn:hover {
+    background-color: green;
+    color: white;
+  }
+
+  #skipBtn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: 2px solid red;
+    border-radius: 5px;
+    background-color: transparent;
+    color: red;
+    width: 30%;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  #skipBtn:hover {
+    background-color: red;
+    color: white;
+  }
+
+    #status {
+      display: none;
+    }
+    .status-message {
+      background-color: black;
+      color: White;
+      padding: 10px;
+      border: 02px solid red;
+      border-radius: 10px;
+    }
+      .timer-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+      background-color: red;
+      margin-bottom: 10px;
+    }
+    #table {
+  width: 100%; /* Adjust the width as needed */
+  max-width: 800px; 
+  margin: 0 auto; 
+   border: 1px solid white;
+}
+.table-wrapper {
+  /* Add any necessary styles for the table wrapper */
+  position: fixed;
+  bottom: 0;
+  width: 100%; /* Adjust the width as needed */
+}
+
+.table-wrapper table {
+  width: 100%; /* Adjust the width as needed */
+}
+   .timer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  background-color: red;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+
+#timer {
+  text-align: center; /* Center the text horizontally */
+   font-size: 20px;
+  color: black;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+#previousQuestionBtn:hover,
+#nextQuestionBtn:hover {
+  background-color: transparent; /* Remove the background color on hover */
+  color: transparent; /* Change the text color on hover */
+}
+
+
+
+ /* Footer styles */
+    footer {
+      background-color: #000000;
+      color: #ffffff;
+      text-align: center;
+      font-size: 012px;
+      padding: 3px;
+      font-weight: 600;
+    }
+ .question-buttons-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: 100%;
+  margin-top: 10px;
+}
+
+.question-buttons {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping to a new row */
+}
+
+.question-button {
+  margin: 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  max-width: 20%; /* Set a max-width for each button */
+}
+
+.question-button.current-question {
+  background-color: yellow;
+  color: black;
+}
+
+    .question-grid-container {
+           display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        .question-grid {
+            background-color: rgb(10, 10, 70);
+            padding: 20px;
+            width: 98%;
+            height: 65%;
+            border-radius: 5px;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+
+        .question-buttons {
+             display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .question-button {
+            margin: 5px;
+            padding: 5px 10px;
+            border: none;
+            background-color: gray;
+            cursor: pointer;
+        }
+
+        .question-button.current-question {
+             background-color: yellow;
+            color: black;
+        }
+        .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .box {
+        display: inline-block;
+        margin: 05px;
+        padding: 05px;
+        border-radius: 20px;
+        transition: transform 0.3s;
+        border: 2px solid #000000;
+        max-width: 100px;
+    }
+   .box img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .box:hover {
+        transform: scale(1.1);
+    }
+    .box-container {
+      text-align: center; /* Center the text */
+    }
+
+    .box-text {
+      margin-top: 10px; /* Adjust the spacing between the box and text */
     }
 
     @media only screen and (max-width: 600px) {
-      .swiper-button-up,
-      .swiper-button-down {
-        font-size: 10px;
-        width: 30px;
-        height: 30px;
-      }
-      .mobile-screen {
-        width: 95%;
-      }
+        .box {
+            width: calc(50% - 01px);
+        }
     }
     
-    .follow {
-        margin-left: 15px;
-        background-color: transparent;
-        color: white;
-        border: 2px solid red;
-        font-size: 15px;
-        border-radius: 10px;
-        padding: 2px 8px;
-    }
-    
-    .follow:hover {
-        font-size: 16px;
-        border-color: white;
-    }
-  </style>
-</head>
-<body>
-  <div class="mobile-screen">
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <!-- Your video slides go here -->
-        <div class="swiper-slide">
-          <video controls="controls" class="swiper-video" id="video1" loop="loop"/>
+     .popup-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            transform: rotate(90deg);
+        }
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+        
+        .download-button {
+  display: inline-block;
+  background-color: black; /* Background color for the button */
+  color: #fff; /* Text color */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border: none; /* Remove the default button border */
+  border-radius: 5px; 
+  cursor: pointer; 
 
-            <source src="https://developerr-bots.xyz/123451/GJr5vBGnTDtxTqwDAFhYO4F2Cjslbq_EAAAF.mp4?hash=AgADHB" type="video/mp4"></source>
-          </video></div>
-          <!-- Profile Info for Video 1 -->
-          <div class="profile-info">
-            <div class="profile-text">
-              <div class="profile-pic">
-                <img src="https://paycoincapital.com/wp-content/uploads/2023/04/ceo-2-150x150.png" alt="Profile Pic">
-              </div>
-              <div class="profile-name">
-                @Krishna
-              </div>
-              <img class="verified-checkmark" src="https://freewallah.com/wp-content/uploads/2023/11/verified.png" alt="Verified Checkmark">
-              <button class="follow">Follow</button>
-            </div>
-            <div class="profile-paragraph">Owner of TaporiTv.com 😜</div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <video controls="controls" class="swiper-video" id="video2" loop>
-            <source src="https://developerr-bots.xyz/123463/Ai+ai+ai.mp4?hash=AgAD4w" type="video/mp4">
-          </video>
-          <!-- Profile Info for Video 2 -->
-          <div class="profile-info">
-            <div class="profile-text">
-              <div class="profile-pic">
-                <img src="https://yt3.ggpht.com/gQXfGVDRe3yKP1dt6AeIyFE_N5mtRtC2rMXYmfsxASKBGe6K0ufenwBV6FxNDhTDnThbCs9SN4E=s48-c-k-c0x00ffffff-no-rj" alt="Profile Pic">
-              </div>
-              <div class="profile-name">
-                @audaamar
-              </div>
-              <img class="verified-checkmark" src="https://freewallah.com/wp-content/uploads/2023/11/verified.png" alt="Verified Checkmark">
-              <button class="follow">Follow</button>
-            </div>
-            <div class="profile-paragraph">ai ai ai...</div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <video controls="controls" class="swiper-video" id="video3" loop>
-            <source src="https://developerr-bots.xyz/123459/Humanity_is_alive_%23dailymemes_%23funnymemes_%23dankmeme_%23edgyme_%23shorts.mp4?hash=AgADxQ" type="video/mp4">
-          </video>
-          <!-- Profile Info for Video 3 -->
-          <div class="profile-info">
-            <div class="profile-text">
-              <div class="profile-pic">
-                <img src="https://memasik.app/img/memasik-logo.png" alt="Profile Pic">
-              </div>
-              <div class="profile-name">
-                Memepur
-              </div>
-              <button class="follow">Follow</button>
-            </div>
-            <div class="profile-paragraph">When an architect and engineer have humanity!</div>
-          </div>
-        </div>
-      </div>
-      <!-- Add Navigation -->
-      <div class="swiper-button-up">▲</div>
-      <div class="swiper-button-down">▼</div>
+  /* Optional: Add hover effect */
+  transition: background-color 0.3s;
+}
+
+.download-button:hover {
+  background-color: #0056b3; 
+}
+        
+.close-button {
+    background-color: red;
+    color: white;
+    border: none;
+    width: 90%
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 05px;
+}
+#questionGridButton {
+    background-color: black; 
+    color: white;
+    border: none; 
+    width: auto;
+    padding: 10px 10px;
+    border-radius: 5px; 
+    cursor: pointer;
+    outline: none; 
+    transition: background-color 0.3s; /* Add a transition effect for background color */
+  }
+
+  #questionGridButton:hover {
+    background-color: green;
+  }
+   .container {
+            box-sizing: border-box;
+            padding: 10px;
+            margin: 02px 10px; /
+            text-align: center;
+            display: flex; 
+            align-items: center; 
+            height: 50px; 
+            font-size: 15px;
+            border: 02px solid black;
+            border-radius: 05px;
+            font-weight: 800;
+        }
+
+        
+        .container1 {
+            background-color: red;
+            color: white;
+        }
+
+        .container2 {
+            background-color: #0000cc;
+            color: white;
+        }
+
+        .container3 {
+            background-color: #ffff00;
+            color: black;
+        }
+
+        .container4 {
+            background-color: #00cc00;
+            color: white;
+        }
+
+        
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Media query for screens narrower than 768px (typical mobile devices) */
+        @media (max-width: 768px) {
+            .container {
+                width: calc(50% - 20px);
+                float: left;
+            }
+
+            .container2 {
+                clear: none;
+            }
+        }
+
+        /* Media query for screens wider than 768px (typical desktop devices) */
+        @media (min-width: 769px) {
+            .container {
+                width: calc(25% - 20px);
+                float: left;
+            }
+
+            .container4 {
+                clear: none;
+            }
+        }
+        
+        /*tab joh instruction page pr hai */
+  @keyframes blink {
+  0% { opacity: 0.2; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.tabs {
+  display: block;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 0;
+  overflow: hidden;
+  border: 2px solid #000; /* Add a border to the tab container */
+  border-radius: 9px;
+  padding: 9px;
+  position: relative; /* Add relative positioning to the tab container */
+}
+
+.tabs::before {
+  content: " "; /* Create an empty content for the pseudo-element */
+  position: absolute;
+  top: 01px; /* Adjust the top position to fully overlay the top edge */
+  left: 01px; /* Adjust the left position to fully overlay the left edge */
+  width: 18px; /* Adjust the size of the dot */
+  height: 18px; /* Adjust the size of the dot */
+  background-color: red; /* Dot color */
+  border: 02px solid black;
+  border-radius: 50%; /* Make it a circle */
+  animation: blink 1s infinite; /* Apply the blinking animation */
+  z-index: 1; /* Overlay the dot on top of the tab */
+}
+
+.tabs [class^="tab"] label,
+.tabs [class*=" tab"] label {
+  color: black; /* Change text color to black */
+  cursor: pointer;
+  display: block;
+  font-size: 1.1em;
+  font-weight: 300;
+  line-height: 1px;
+  padding: 2rem 0;
+  text-align: center;
+  border: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+  .tabs [class^="tab"] [type="radio"],
+  .tabs [class*=" tab"] [type="radio"] {
+    border-bottom: 0px solid black;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: block;
+    width: 100%;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out; }
+    .tabs [class^="tab"] [type="radio"]:hover, .tabs [class^="tab"] [type="radio"]:focus,
+    .tabs [class*=" tab"] [type="radio"]:hover,
+    .tabs [class*=" tab"] [type="radio"]:focus {
+      border-bottom: 3px solid blue; }
+    .tabs [class^="tab"] [type="radio"]:checked,
+    .tabs [class*=" tab"] [type="radio"]:checked {
+      border: 2px solid black; }
+    .tabs [class^="tab"] [type="radio"]:checked + div,
+    .tabs [class*=" tab"] [type="radio"]:checked + div {
+      opacity: 1; }
+    .tabs [class^="tab"] [type="radio"] + div,
+    .tabs [class*=" tab"] [type="radio"] + div {
+      display: block;
+      opacity: 0;
+      padding: 2rem 0;
+      width: 90%;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out; }
+  .tabs .tab-2 {
+    width: 50%; }
+    .tabs .tab-2 [type="radio"] + div {
+      width: 200%;
+      margin-left: 200%; }
+    .tabs .tab-2 [type="radio"]:checked + div {
+      margin-left: 0; }
+    .tabs .tab-2:last-child [type="radio"] + div {
+      margin-left: 100%; }
+    .tabs .tab-2:last-child [type="radio"]:checked + div {
+      margin-left: -100%; }
+      
+      .highlighted-red {
+         color: red;
+         text-decoration: underline;
+        }
+      .highlighted-blue {
+         color: blue;
+         text-decoration: underline;
+        }
+  </style>
+   
+
+<body>
+  
+  <div class="quiz-container">
+    <div id="instructionPage" class="instruction-page">
+      <h4>Bihar Board 2023 Math PYQ | Practice Test</h4>
+      <div class="container container1">
+        <p>100 Que.</p>
+    </div>
+    <div class="container container2">
+        <p>200 Min.</p>
+    </div>
+    <div class="container container3">
+        <p>Full Analysis</p>
+    </div>
+    <div class="container container4">
+        <p>AnswerKey</p>
+    </div>
+    <div class="clearfix"></div>
+    
+    
+      
+      <p style="color: red;">⚡️Don't click " Back " otherwise all responses will be cleared and you have to start from the beginning.</p>
+      <div
+     <div class="tabs">
+  <div class="tab-2">
+    <label for="tab2-1">Info</label>
+    <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
+    <div>
+      
+        <p>Bihar Board 2023 Question paper and Answerkey | Practice. In this Practice Test you will get full Math 2023 Bihar Board MCQ Question Paper Test Pracice</p>
+        <p><span class="highlighted-red">Syllabus:</span> 2023 BSEB Math MCQ PYQ</p>
     </div>
   </div>
+  <div class="tab-2">
+    <label for="tab2-2">Marks</label>
+    <input id="tab2-2" name="tabs-two" type="radio">
+    <div>
+      
+      <p>Marking Scheme is same as Bihar Board  Marking Scheme. </p>
+      <p><span class="highlighted-blue">Marking Scheme:</span> +1 -></p>
+      <p>+1 -> Correct Answer</p>
+      <p>0 -> InCorrect Answer or Skipped</p>
+    </div>
+  </div>
+</div>
 
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+     <button id="startBtn" class="start-button" onclick="startQuiz()"> Start Test </button>
+
+    </div>
+
+ <div id="questionPage" style="display: none;">
+      <div id="timer">Time Remaining: 02:00:00</div>
+      <div class="button-row">
+          
+    </div>
+    
+     <div class="button-container">
+         <button id="previousQuestionBtn" class="custom-button" onclick="goToPreviousQuestion()">
+            <img src="https://www.svgrepo.com/show/521961/arrow-left-square.svg" alt="Previous" class="custom-svg">
+        </button>
+
+        <button id="questionGridButton" onclick="openQuestionGrid()"><span style="vertical-align: middle; display: inline-block; margin-bottom: 1px"><img src="https://cdn.iconscout.com/icon/free/png-256/free-grid-application-menu-artboard-layer-9-16570.png?f=webp" alt="Dapps Logo" style="height: 1.70rem;display: inline-block; border-radius: 0%; "></span> Questions Menu</button>
+       <button id="nextQuestionBtn" class="custom-button" onclick="goToNextQuestion()">
+        <img src="https://www.svgrepo.com/show/521971/arrow-right-square.svg" alt="Next" class="custom-svg">
+        </button>
+        
+    </div>
+    
+   <div class="question-buttons" id="questionButtons"></div>
+      <div class="question" id="question"></div>
+      
+      <div id="popupContainer" class="popup-container">
+  <button id="closePopup" class="close-popup-button" onclick="closePopup()">&times;</button>
+  <img id="popupImage" src="" alt="Question image" class="popup-image">
+</div>
+
+      
+      <div class="options" id="options"></div>
+      
+      <div class="button-row">
+          
+    <button id="submitBtn" onclick="submitAnswer()" disabled>Save</button>
+    
+    <button id="skipBtn" onclick="skipQuestion()">Skip</button>
+    
+    
+    
+  </div>
+  <div id="score" class="score"></div>
+  <div id="status"></div>
+  
+  <img id="resultImage" src="https://freewallah.com/wp-content/uploads/2023/09/answer-08954.png" alt="Result Image">
+   
+</div>
+   
   <script>
-    var swiper = new Swiper('.swiper-container', {
-      direction: 'vertical',
-      navigation: {
-        nextEl: '.swiper-button-down',
-        prevEl: '.swiper-button-up',
+    const questions = [
+      
+      
+      {
+        question: "https://freewallah.com/wp-content/uploads/2023/11/01.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
       },
-      on: {
-        slideChange: function () {
-          pauseOtherVideos(this);
-        },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/02.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
       },
-    });
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/03.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/04.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/05.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/06.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/07.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/08.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 3
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/09.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/10.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/11.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/12.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/13.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/14.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/15.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/6.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/17.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/18.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/19.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/20.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/21.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/22.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/23.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/24.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/25.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/26.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/27.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/28.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 3
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/29.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 3
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/30.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/31.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/32.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 3
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/33.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/34.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/35.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/36.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/37.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/38.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/39.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/40.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/41.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/42.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 3
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/43.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/44.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/45.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/46.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/47.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/48.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/49.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/50.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/51.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/52.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/53.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/54.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 3
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/55.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/56.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 3
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/57.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/58.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/59.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/60.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 3
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/61.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/62.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/63.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/64.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/65.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/66.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/67.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/68.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/69.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/70.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/71.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/72.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/73.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/74.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 3
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/75.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/76.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/77.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/78.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/79.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/80.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/81.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/82.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/83.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
 
-    function pauseOtherVideos(swiperInstance) {
-      var allVideos = document.querySelectorAll('.swiper-video');
-      allVideos.forEach(function (video) {
-        if (!swiperInstance.isBeginning && !swiperInstance.isEnd) {
-          video.pause();
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/84.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/85.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/86.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/87.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/88.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/89.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/90.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 3
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/91.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/92.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/93.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/94.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/95.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/96.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 3
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/97.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/98.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 0
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/99.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 2
+     
+      },
+	{
+        question: "https://freewallah.com/wp-content/uploads/2023/11/100.png",
+        options: ["Option A", "Option B", "Option C", "Option D"],
+        answer: 1
+     
+      },
+      
+     
+    
+      
+    ];
+
+   let currentQuestion = 0;
+    let score = 0;
+    let timeRemaining = 120;
+    let attempted = 0;
+    let correct = 0;
+    let wrong = 0;
+    let skipped = 0;
+    let quizStartTime;
+    let selectedOption = null;
+    let selectedOptions = [];
+    let timer;
+    let endTime;
+    let visitedQuestions = new Array(questions.length).fill(false);
+    let answeredQuestions = new Array(questions.length).fill(false);
+
+
+     function startQuiz() {
+    quizStartTime = Date.now();
+    document.getElementById("instructionPage").style.display = "none";
+    document.getElementById("questionPage").style.display = "block";
+    displayQuestion();
+    timer = setInterval(updateTimer, 1000); // Start the timer and store it in the timer variable
+  }
+    function goToPreviousQuestion() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        displayQuestion();
+    }
+}
+
+function goToNextQuestion() {
+    if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        displayQuestion();
+    }
+}
+
+
+    function showPopup(imageSrc) {
+            const popupContainer = document.getElementById("popupContainer");
+            const popupImage = document.getElementById("popupImage");
+
+            popupImage.src = imageSrc;
+            popupContainer.style.display = "flex";
         }
-      });
+
+        function closePopup() {
+            const popupContainer = document.getElementById("popupContainer");
+            popupContainer.style.display = "none";
+        }
+    
+     function displayQuestion() {
+  const questionImage = document.createElement("img");
+  questionImage.src = questions[currentQuestion].question;
+  questionImage.alt = "Question image";
+  questionImage.className = "question-image"; // Add this class
+
+  // Add border to the question image
+  questionImage.style.border = "2px solid black";
+  questionImage.style.borderRadius = "10px";
+  questionImage.style.display = "block";
+  questionImage.style.margin = "0 auto";
+  questionImage.style.padding = "0px";
+
+  const isIntegerInput = questions[currentQuestion].integerInput;
+
+  if (visitedQuestions[currentQuestion]) {
+    document.getElementById("status").innerText = "Status: Visited";
+  } else {
+    document.getElementById("status").innerText = "Status: Not Visited";
+  }
+  document.getElementById("resultImage").style.display = "none";
+
+  // Check if the current question has been answered
+  if (answeredQuestions[currentQuestion]) {
+    const userAnswer = selectedOptions.find((option) => option.questionNumber === currentQuestion + 1).selectedOption;
+    const correctAnswer = questions[currentQuestion].answer;
+
+    const status = userAnswer === correctAnswer ? "Correct" : "Incorrect";
+
+    document.getElementById("status").innerText += ` - ${status}`;
+  } else {
+    document.getElementById("status").innerText += " - Not Answered";
+  }
+  
+
+  const questionNumber = document.createElement("div");
+  questionNumber.textContent = "Question " + (currentQuestion + 1);
+  questionNumber.className = "question-number";
+
+  const questionContainer = document.getElementById("question");
+  questionContainer.innerHTML = "";
+  questionContainer.appendChild(questionNumber);
+  questionContainer.appendChild(questionImage);
+
+  const optionsContainer = document.getElementById("options");
+  optionsContainer.innerHTML = "";
+
+  if (isIntegerInput) {
+    // Display an input box for integer-type question
+    const inputBox = document.createElement("input");
+    inputBox.type = "number";
+    inputBox.id = "integerInputBox";
+    optionsContainer.appendChild(inputBox);
+  } else {
+    // Display options for other types of questions
+    questions[currentQuestion].options.forEach((option, index) => {
+      optionsContainer.innerHTML += `<label class="option" onclick="selectOption(${index})">${option}</label>`;
+    });
+  }
+}
+
+
+     function openQuestionGrid() {
+    const questionGridContainer = document.createElement("div");
+    questionGridContainer.className = "question-grid-container";
+
+    const questionGrid = document.createElement("div");
+    questionGrid.className = "question-grid";
+
+    // Create a close button for the pop-up
+    const closeButton = document.createElement("button");
+    closeButton.textContent = "Close";
+    
+    // Apply the custom style class to the close button
+    closeButton.className = "close-button";
+
+    // Set the close button's width to 90% using an inline style
+    closeButton.style.width = "90%";
+
+    closeButton.addEventListener("click", closeQuestionGrid);
+
+    // Add a close button to the pop-up before the question buttons
+    questionGrid.appendChild(closeButton);
+
+    // Create a container for question number buttons
+    const questionButtonsContainer = document.createElement("div");
+    questionButtonsContainer.className = "question-buttons";
+
+    // Add question buttons to the grid
+    for (let i = 0; i < questions.length; i++) {
+        const questionButton = document.createElement("button");
+        questionButton.textContent = (i + 1).toString().padStart(2, '0');
+        questionButton.className = "question-button";
+        if (i === currentQuestion) {
+            questionButton.classList.add("current-question");
+        }
+        questionButton.addEventListener("click", () => {
+            goToQuestion(i);
+            closeQuestionGrid();
+        });
+        questionButtonsContainer.appendChild(questionButton);
+
+        // Add a line break after every 5 buttons
+        if ((i + 1) % 5 === 0) {
+            const lineBreak = document.createElement("br");
+            questionButtonsContainer.appendChild(lineBreak);
+        }
     }
 
-    // Hide all controls except play/pause
-    var videos = document.querySelectorAll('.swiper-video');
-    videos.forEach(function (video) {
-      video.controls = false; // Disable default controls
+    questionGrid.appendChild(questionButtonsContainer);
+    questionGridContainer.appendChild(questionGrid);
+    document.body.appendChild(questionGridContainer);
 
-      // Show custom play/pause button
-      video.addEventListener('click', function () {
-        if (video.paused) {
-          video.play();
-        } else {
-          video.pause();
+    questionGridContainer.style.display = "flex"; // Show the pop-up container
+}
+
+
+
+        // Function to close the pop-up container
+     function closeQuestionGrid() {
+            const questionGridContainer = document.querySelector(".question-grid-container");
+            if (questionGridContainer) {
+                questionGridContainer.remove();
+            }
         }
+
+
+     function selectOption(index) {
+  const optionButtons = document.getElementsByClassName("option");
+
+  const isIntegerInput = questions[currentQuestion].integerInput;
+
+  if (isIntegerInput) {
+    const inputBox = document.getElementById("integerInputBox");
+    const userAnswer = parseInt(inputBox.value, 10);
+
+    if (!isNaN(userAnswer)) {
+      selectedOption = userAnswer; // Store the selected integer value
+      document.getElementById("submitBtn").disabled = false;
+    } else {
+      // Handle invalid input (non-integer)
+      alert("Please enter a valid integer.");
+      return;
+    }
+  } else {
+    // Handle other types of questions
+    if (optionButtons[index].classList.contains("selected")) {
+      // If the option is already selected, deselect it
+      optionButtons[index].classList.remove("selected");
+      selectedOption = null;
+      document.getElementById("submitBtn").disabled = true;
+    } else {
+      // If the option is not selected, select it
+      for (let i = 0; i < optionButtons.length; i++) {
+        optionButtons[i].classList.remove("selected");
+      }
+      optionButtons[index].classList.add("selected");
+      selectedOption = index;
+      document.getElementById("submitBtn").disabled = false;
+    }
+  }
+}
+
+
+
+     function submitAnswer() {
+  if (timeRemaining <= 0 || currentQuestion === questions.length) {
+    showStatus();
+    return;
+  }
+
+  attempted++;
+
+  const isIntegerInput = questions[currentQuestion].integerInput;
+
+  if (isIntegerInput) {
+    const inputBox = document.getElementById("integerInputBox");
+    const userAnswer = parseInt(inputBox.value, 10);
+
+    if (!isNaN(userAnswer)) {
+      selectedOptions.push({
+        questionNumber: currentQuestion + 1,
+        selectedOption: userAnswer,
+        correctOption: questions[currentQuestion].answer,
       });
 
-      // Restart video when it ends
-      video.addEventListener('ended', function () {
-        video.currentTime = 0;
-        video.play();
+      if (userAnswer === questions[currentQuestion].answer) {
+        score += 1; // +1 for correct
+        correct++;
+      } else {
+        score += 0; // 0 for incorrect
+        wrong++;
+      }
+    } else {
+      // Handle invalid input (non-integer)
+      alert("Please enter a valid integer.");
+      return;
+    }
+  } else {
+    const selectedOptionIndex = selectedOption;
+
+    if (selectedOptionIndex !== null) {
+      if (selectedOptionIndex === questions[currentQuestion].answer) {
+        score += 1; // +1 for correct
+        correct++;
+      } else {
+        score += 0; // 0 for incorrect
+        wrong++;
+      }
+
+      selectedOptions.push({
+        questionNumber: currentQuestion + 1,
+        selectedOption: questions[currentQuestion].options[selectedOptionIndex],
+        correctOption: questions[currentQuestion].options[questions[currentQuestion].answer],
       });
+    } else {
+      // Handle the case where no option is selected for multiple-choice questions.
+      // You can set a default value, or show an alert to inform the user.
+      alert("Please select an option.");
+      return;
+    }
+  }
+
+  currentQuestion++; // Move to the next question
+
+  if (currentQuestion < questions.length) {
+    displayQuestion(); // Display the next question
+  } else {
+    showStatus(); // Show the final status if there are no more questions
+  }
+
+  selectedOption = null;
+  const optionButtons = document.getElementsByClassName("option");
+  for (let i = 0; i < optionButtons.length; i++) {
+    optionButtons[i].classList.remove("selected");
+  }
+  document.getElementById("submitBtn").disabled = true;
+}
+
+function skipQuestion() {
+  if (timeRemaining <= 0 || currentQuestion === questions.length) {
+    showStatus();
+    return;
+  }
+
+  skipped++;
+  const isIntegerInput = questions[currentQuestion].integerInput;
+
+  if (isIntegerInput) {
+    selectedOptions.push({
+      questionNumber: currentQuestion + 1,
+      selectedOption: "Skipped",
+      correctOption: questions[currentQuestion].answer
     });
-  </script>
-</body>
+  } else {
+    selectedOptions.push({
+      questionNumber: currentQuestion + 1,
+      selectedOption: "Skipped",
+      correctOption: questions[currentQuestion].answer
+    });
+  }
+
+  currentQuestion++;
+  selectedOption = null;
+  const optionButtons = document.getElementsByClassName("option");
+  for (let i = 0; i < optionButtons.length; i++) {
+    optionButtons[i].classList.remove("selected");
+  }
+  document.getElementById("submitBtn").disabled = true;
+
+  if (currentQuestion < questions.length) {
+    displayQuestion();
+  } else {
+    showStatus();
+  }
+}
+
+
+     function skipQuestion() {
+  if (timeRemaining <= 0 || currentQuestion === questions.length) {
+    showStatus();
+    return;
+  }
+
+  skipped++;
+  const isIntegerInput = questions[currentQuestion].integerInput;
+
+  if (isIntegerInput) {
+    selectedOptions.push({
+      questionNumber: currentQuestion + 1,
+      selectedOption: "Not Attempted",
+      correctOption: questions[currentQuestion].answer
+    });
+  } else {
+    selectedOptions.push({
+      questionNumber: currentQuestion + 1,
+      selectedOption: "Skipped",
+      correctOption: questions[currentQuestion].answer
+    });
+  }
+
+  currentQuestion++;
+  selectedOption = null;
+  const optionButtons = document.getElementsByClassName("option");
+  for (let i = 0; i < optionButtons.length; i++) {
+    optionButtons[i].classList.remove("selected");
+  }
+  document.getElementById("submitBtn").disabled = true;
+
+  if (currentQuestion < questions.length) {
+    displayQuestion();
+  } else {
+    showStatus();
+  }
+}
+
+
+
+    const countdownTime = 3900000; // 1 hour and 5 minutes in milliseconds
+
+  let timerInterval;
+  let remainingTime = countdownTime;
+  
+
+    function startTimer() {
+    timerInterval = setInterval(updateTimer, 1000);
+  }
+
+    function updateTimer() {
+    const timerElement = document.getElementById('timer');
+    const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+    const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+    timerElement.textContent = `Time Remaining: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+    remainingTime -= 1000;
+
+    if (remainingTime < 0) {
+      clearInterval(timerInterval);
+      timerElement.textContent = 'Time Up!';
+    }
+  }
+  
+ function showStatus() {
+  clearInterval(timer);
+
+  const scoreElement = document.getElementById("score");
+  scoreElement.innerHTML = `Your score: ${score}/${questions.length}`;
+  scoreElement.style.textAlign = "center";
+  scoreElement.style.border = "2px solid black";
+  scoreElement.style.fontSize = "24px";
+  scoreElement.style.fontWeight = "bold";
+  scoreElement.style.borderRadius = "10px";
+  scoreElement.style.marginBottom = "5px";
+
+  document.getElementById("timer").style.display = "none";
+  document.getElementById("question").style.display = "none";
+  document.getElementById("options").style.display = "none";
+  document.getElementById("submitBtn").style.display = "none";
+  document.getElementById("skipBtn").style.display = "none";
+  document.getElementById("status").style.display = "block";
+  document.getElementById("questionGridButton").style.display = "none";
+  document.getElementById("previousQuestionBtn").style.display = "none";
+  document.getElementById("nextQuestionBtn").style.display = "none";
+
+  const questionButtonsContainer = document.getElementById("questionButtons");
+  questionButtonsContainer.style.display = "none";
+
+  let statusHTML = `<div class="status-message">You attempted "${attempted}" out of "${questions.length}" questions.<br><br>`;
+  statusHTML += `<div style="background-color: black; color: white; padding: 02px; border: 2px solid white; border-radius: 5px; text-align: center; font-weight: 600;">
+  Your Responses :
+</div>
+ <table style="width: 100%; margin: 0 auto;"><tr><th style="width: 40%;">Question No.</th><th style="width: 60%;">Your Selected Option</th></tr>`;
+
+  selectedOptions.forEach((selected) => {
+    let statusText = "Not Attempted";
+
+    if (answeredQuestions[selected.questionNumber - 1]) {
+      const userAnswer = selected.selectedOption;
+      const correctAnswer = questions[selected.questionNumber - 1].answer;
+      statusText = userAnswer === correctAnswer ? "Correct" : "Incorrect";
+    }
+
+    const selectedOptionText = typeof selected.selectedOption === "number"
+      ? `Option ${selected.selectedOption + 1}`
+      : selected.selectedOption;
+
+    const resultIcon = statusText === "Correct" ? "&#10004;" : "&#10008;";
+
+    statusHTML += `<tr><td>${selected.questionNumber}</td><td>${selectedOptionText}</td><td></td></tr>`;
+  });
+
+  statusHTML += `</table></div><br><center><button class="download-button">Question PDF Download<span style="vertical-align: middle; display: inline-block; margin-bottom: 1px"><img src="https://www.svgrepo.com/show/424860/pdf-file-type.svg" alt="Dapps Logo" style="height: 1.90rem; display: inline-block; border-radius: 0%; "></span></button></center><br><div style="background-color: black; color: white; padding: 02px; border: 2px solid white; border-radius: 5px; text-align: center; font-weight: 600;">
+  AnswerKey :
+</div><img src="https://freewallah.com/wp-content/uploads/2023/09/answer-08954.png" alt="Result Image">`;
+
+  document.getElementById("status").innerHTML = statusHTML;
+}
+
+
+
+
+    function updateQuestionButtons() {
+  const questionButtonsContainer = document.getElementById("questionButtonsContainer");
+  const questionButtonsDiv = document.querySelector(".question-buttons");
+
+  // Clear existing buttons
+  questionButtonsDiv.innerHTML = "";
+
+  // Determine the range of buttons to display
+  const startIndex = Math.max(0, currentQuestion - 2); // Display 5 buttons at a time
+  const endIndex = Math.min(questions.length - 1, startIndex + 4);
+
+  for (let i = startIndex; i <= endIndex; i++) {
+    const questionButton = document.createElement("button");
+    questionButton.textContent = (i + 1).toString().padStart(2, '0');
+    questionButton.className = "question-button";
+    if (i === currentQuestion) {
+      questionButton.classList.add("current-question");
+    }
+    questionButton.addEventListener("click", () => goToQuestion(i));
+    questionButtonsDiv.appendChild(questionButton);
+  }
+
+  // Scroll to the current question button if necessary
+  const currentButton = document.querySelector(".question-button.current-question");
+  if (currentButton) {
+    questionButtonsContainer.scrollLeft = currentButton.offsetLeft - questionButtonsContainer.offsetWidth / 2;
+  }
+}
+
+// Call the updateQuestionButtons function whenever you change the currentQuestion
+
+ // Add a confirmation message when the user tries to leave the page
+    window.onbeforeunload = function () {
+      return 'Are you sure you want to leave this page? Your progress may be lost.';
+    };
+
+    // Function to remove the confirmation message
+    function removeBeforeUnloadEvent() {
+      window.onbeforeunload = null;
+    }
+
+    
+    function goToQuestion(questionIndex) {
+  if (questionIndex !== currentQuestion) {
+    currentQuestion = questionIndex;
+    displayQuestion();
+    document.getElementById("submitBtn").disabled = true;
+    document.getElementById("status").style.display = "none";
+    document.getElementById("timer").style.display = "block";
+    document.getElementById("question").style.display = "block";
+    document.getElementById("options").style.display = "block";
+    clearInterval(timer);
+    timer = setInterval(updateTimer, 1000);
+  }
+}
+
+
+    function showInstructions() {
+      document.getElementById("instructionPage").style.display = "block";
+      document.getElementById("startBtn").disabled = false;
+      document.getElementById("questionPage").style.display = "none";
+       document.getElementById("questionGridButton").style.display = "none"; // Hide the Question Grid Button
+    }
+
+    function startQuiz() {
+      document.getElementById("instructionPage").style.display = "none";
+      document.getElementById("questionPage").style.display = "block";
+      displayQuestion();
+      timer = setInterval(updateTimer, 1000);
+    }
+    
+    
+
+ </script>
+  </div>
+  </div>
+
+<footer>
+    <!-- Footer content goes here -->
+    <p>Made with ❤️ | Desiboyz</p>
+    <p>2023 &copy;  | FreeWallah.com</p>
+  </footer>
+    </body>
+
 </html>
