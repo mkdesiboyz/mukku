@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"></link>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+
+    .mobile-screen {
+      width: 30%;
+      height: 90vh;
+      overflow: hidden;
+      position: relative;
+      border: 5px solid red;
+      border-radius: 20px;
+      margin: 0 auto;
+      background-color: #000; /* Set background color as needed */
+    }
+
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block; /* Make the video a block-level element */
+      margin: 0 auto; /* Center the video horizontally */
+    }
+
+    .swiper-button-up,
+    .swiper-button-down {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background-color: #333;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      border: 2px solid red;
+      border-radius: 7px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .swiper-button-up {
+      left: 10px;
+    }
+
+    .swiper-button-down {
+      right: 10px;
+    }
+
+    .profile-info {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: left;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      box-sizing: border-box;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .profile-pic {
+      width: 23px; 
+      height: 23px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 10px;
+      display: inline-block;
+    }
+
+    .profile-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-text {
+      color: #fff;
+      display: flex;
+      align-items: center;
+    }
+
+    .profile-name {
+      font-size: 16px;
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+    .verified-checkmark {
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+    }
+
+    .profile-paragraph {
+      color: #fff;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .swiper-button-up,
+      .swiper-button-down {
+        font-size: 10px;
+        width: 30px;
+        height: 30px;
+      }
+      .mobile-screen {
+        width: 95%;
+      }
+    }
+    
+    .follow {
+        margin-left: 15px;
+        background-color: transparent;
+        color: white;
+        border: 2px solid red;
+        font-size: 15px;
+        border-radius: 10px;
+        padding: 2px 8px;
+    }
+    
+    .follow:hover {
+        font-size: 16px;
+        border-color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-screen">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <!-- Your video slides go here -->
+        <div class="swiper-slide">
+          <video controls="controls" class="swiper-video" id="video1" loop="loop"/>
+
+            <source src="https://developerr-bots.xyz/123451/GJr5vBGnTDtxTqwDAFhYO4F2Cjslbq_EAAAF.mp4?hash=AgADHB" type="video/mp4"></source>
+          </video></div>
+          <!-- Profile Info for Video 1 -->
+          <div class="profile-info">
+            <div class="profile-text">
+              <div class="profile-pic">
+                <img src="https://paycoincapital.com/wp-content/uploads/2023/04/ceo-2-150x150.png" alt="Profile Pic">
+              </div>
+              <div class="profile-name">
+                @Krishna
+              </div>
+              <img class="verified-checkmark" src="https://freewallah.com/wp-content/uploads/2023/11/verified.png" alt="Verified Checkmark">
+              <button class="follow">Follow</button>
+            </div>
+            <div class="profile-paragraph">Owner of TaporiTv.com 😜</div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <video controls="controls" class="swiper-video" id="video2" loop>
+            <source src="https://developerr-bots.xyz/123463/Ai+ai+ai.mp4?hash=AgAD4w" type="video/mp4">
+          </video>
+          <!-- Profile Info for Video 2 -->
+          <div class="profile-info">
+            <div class="profile-text">
+              <div class="profile-pic">
+                <img src="https://yt3.ggpht.com/gQXfGVDRe3yKP1dt6AeIyFE_N5mtRtC2rMXYmfsxASKBGe6K0ufenwBV6FxNDhTDnThbCs9SN4E=s48-c-k-c0x00ffffff-no-rj" alt="Profile Pic">
+              </div>
+              <div class="profile-name">
+                @audaamar
+              </div>
+              <img class="verified-checkmark" src="https://freewallah.com/wp-content/uploads/2023/11/verified.png" alt="Verified Checkmark">
+              <button class="follow">Follow</button>
+            </div>
+            <div class="profile-paragraph">ai ai ai...</div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <video controls="controls" class="swiper-video" id="video3" loop>
+            <source src="https://developerr-bots.xyz/123459/Humanity_is_alive_%23dailymemes_%23funnymemes_%23dankmeme_%23edgyme_%23shorts.mp4?hash=AgADxQ" type="video/mp4">
+          </video>
+          <!-- Profile Info for Video 3 -->
+          <div class="profile-info">
+            <div class="profile-text">
+              <div class="profile-pic">
+                <img src="https://memasik.app/img/memasik-logo.png" alt="Profile Pic">
+              </div>
+              <div class="profile-name">
+                Memepur
+              </div>
+              <button class="follow">Follow</button>
+            </div>
+            <div class="profile-paragraph">When an architect and engineer have humanity!</div>
+          </div>
+        </div>
+      </div>
+      <!-- Add Navigation -->
+      <div class="swiper-button-up">▲</div>
+      <div class="swiper-button-down">▼</div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      direction: 'vertical',
+      navigation: {
+        nextEl: '.swiper-button-down',
+        prevEl: '.swiper-button-up',
+      },
+      on: {
+        slideChange: function () {
+          pauseOtherVideos(this);
+        },
+      },
+    });
+
+    function pauseOtherVideos(swiperInstance) {
+      var allVideos = document.querySelectorAll('.swiper-video');
+      allVideos.forEach(function (video) {
+        if (!swiperInstance.isBeginning && !swiperInstance.isEnd) {
+          video.pause();
+        }
+      });
+    }
+
+    // Hide all controls except play/pause
+    var videos = document.querySelectorAll('.swiper-video');
+    videos.forEach(function (video) {
+      video.controls = false; // Disable default controls
+
+      // Show custom play/pause button
+      video.addEventListener('click', function () {
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+
+      // Restart video when it ends
+      video.addEventListener('ended', function () {
+        video.currentTime = 0;
+        video.play();
+      });
+    });
+  </script>
+</body>
+</html>
